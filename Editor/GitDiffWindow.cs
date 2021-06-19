@@ -142,10 +142,16 @@ namespace UniGit
 
 		protected override void OnEnable()
 		{
-			selections ??= new List<SelectionId>();
+			if (selections == null)
+			{
+				selections = new List<SelectionId>();
+			}
 			titleContent.text = WindowName;
 			base.OnEnable();
-            settings ??= new Settings();
+			if (settings == null)
+			{
+				settings = new Settings();
+			}
 			if (Undo.GetCurrentGroupName() == CommitMessageUndoGroup)
 			{
 				Undo.RegisterFullObjectHierarchyUndo(this, "Commit Message Changed");

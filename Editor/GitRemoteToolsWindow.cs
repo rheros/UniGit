@@ -46,46 +46,49 @@ namespace UniGit
 
 		private void InitStyles()
         {
-            styles ??= new Styles()
-            {
-                IssueElementBg = new GUIStyle("IN GameObjectHeader")
-                {
-                },
-                IssueBodyText = new GUIStyle(EditorStyles.textArea)
-                {
-                    wordWrap = true
-                },
-                IssueTitleBig = new GUIStyle("TL Selection H1")
-                {
-                    alignment = TextAnchor.MiddleLeft
-                },
-                IssueTitleBigBg = new GUIStyle("IN GameObjectHeader")
-                {
-                    margin = new RectOffset(0, 0, 8, 8),
-                    padding = new RectOffset(16, 16, 21, 16)
-                },
-                IssueTitle = new GUIStyle(EditorStyles.largeLabel)
-                {
-                    fontStyle = FontStyle.Bold,
-                    fontSize = 14,
-                    alignment = TextAnchor.UpperLeft
-                },
-                IssueLabel = new GUIStyle("sv_iconselector_selection")
-                {
-                    fixedHeight = EditorGUIUtility.singleLineHeight,
-                    margin = new RectOffset(4, 4, 7, 7),
-                    padding = new RectOffset(4, 4, 1, 1),
-                    alignment = TextAnchor.UpperCenter
-                },
-                IssueSubTitle = new GUIStyle(EditorStyles.miniLabel),
-                Avatar = new GUIStyle("ShurikenEffectBg")
-                {
-                    contentOffset = Vector3.zero,
-                    alignment = TextAnchor.MiddleCenter,
-                    clipping = TextClipping.Clip,
-                    imagePosition = ImagePosition.ImageOnly,
-                }
-            };
+			if (styles == null)
+			{
+				styles = new Styles()
+				{
+					IssueElementBg = new GUIStyle("IN GameObjectHeader")
+					{
+					},
+					IssueBodyText = new GUIStyle(EditorStyles.textArea)
+					{
+						wordWrap = true
+					},
+					IssueTitleBig = new GUIStyle("TL Selection H1")
+					{
+						alignment = TextAnchor.MiddleLeft
+					},
+					IssueTitleBigBg = new GUIStyle("IN GameObjectHeader")
+					{
+						margin = new RectOffset(0, 0, 8, 8),
+						padding = new RectOffset(16, 16, 21, 16)
+					},
+					IssueTitle = new GUIStyle(EditorStyles.largeLabel)
+					{
+						fontStyle = FontStyle.Bold,
+						fontSize = 14,
+						alignment = TextAnchor.UpperLeft
+					},
+					IssueLabel = new GUIStyle("sv_iconselector_selection")
+					{
+						fixedHeight = EditorGUIUtility.singleLineHeight,
+						margin = new RectOffset(4, 4, 7, 7),
+						padding = new RectOffset(4, 4, 1, 1),
+						alignment = TextAnchor.UpperCenter
+					},
+					IssueSubTitle = new GUIStyle(EditorStyles.miniLabel),
+					Avatar = new GUIStyle("ShurikenEffectBg")
+					{
+						contentOffset = Vector3.zero,
+						alignment = TextAnchor.MiddleCenter,
+						clipping = TextClipping.Clip,
+						imagePosition = ImagePosition.ImageOnly,
+					}
+				};
+			}
         }
 
 		[UsedImplicitly]

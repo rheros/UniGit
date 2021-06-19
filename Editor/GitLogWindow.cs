@@ -59,22 +59,25 @@ namespace UniGit
 
 		private void InitStyles()
         {
-            styles ??= new Styles()
-            {
-                consoleBox = "CN Box",
-                entryInfoStyle = "CN EntryInfo",
-                entryInfoStyleSmall = "CN EntryInfoSmall",
-                entryStyleEven = "CN EntryBackEven",
-                entryStyleOdd = "CN EntryBackOdd",
-                entryError = "CN EntryErrorIcon",
-                entryLog = "CN EntryInfoIcon",
-                entryWarning = "CN EntryWarnIcon",
-                logIconSmall = GitGUI.IconContent("console.infoicon.sml"),
-                warningIconSmall = GitGUI.IconContent("console.warnicon.sml"),
-                warningIconSmallInactive = GitGUI.IconContent("console.warnicon.inactive.sml"),
-                errorIconSmall = GitGUI.IconContent("console.erroricon.sml"),
-                errorIconSmallInactive = GitGUI.IconContent("console.erroricon.inactive.sml")
-            };
+			if (styles == null)
+			{
+				styles = new Styles()
+				{
+					consoleBox = "CN Box",
+					entryInfoStyle = "CN EntryInfo",
+					entryInfoStyleSmall = "CN EntryInfoSmall",
+					entryStyleEven = "CN EntryBackEven",
+					entryStyleOdd = "CN EntryBackOdd",
+					entryError = "CN EntryErrorIcon",
+					entryLog = "CN EntryInfoIcon",
+					entryWarning = "CN EntryWarnIcon",
+					logIconSmall = GitGUI.IconContent("console.infoicon.sml"),
+					warningIconSmall = GitGUI.IconContent("console.warnicon.sml"),
+					warningIconSmallInactive = GitGUI.IconContent("console.warnicon.inactive.sml"),
+					errorIconSmall = GitGUI.IconContent("console.erroricon.sml"),
+					errorIconSmallInactive = GitGUI.IconContent("console.erroricon.inactive.sml")
+				};
+			}
         }
 
 		private void OnGUI()

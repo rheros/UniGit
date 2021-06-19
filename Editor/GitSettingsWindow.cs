@@ -222,8 +222,8 @@ namespace UniGit
             helpButton = root.Q<VisualElement>("HelpSettings");
             donateButton = root.Q<VisualElement>("Donate");
 
-            helpButton.RegisterCallback<ClickEvent>(e => GitLinks.GoTo(GitLinks.SettingsWindowHelp));
-            donateButton.RegisterCallback<ClickEvent>(e => GitLinks.GoTo(GitLinks.Donate));
+            helpButton.RegisterCallback<ContextClickEvent>(e => GitLinks.GoTo(GitLinks.SettingsWindowHelp));
+            donateButton.RegisterCallback<ContextClickEvent>(e => GitLinks.GoTo(GitLinks.Donate));
         }
 
 		protected override void OnGitUpdate(GitRepoStatus status, string[] paths)

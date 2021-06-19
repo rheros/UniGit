@@ -446,20 +446,24 @@ namespace UniGit
 
 		private void InitStyles()
         {
-            styles ??= new Styles
-            {
-                NormalLine = new GUIStyle(EditorStyles.label)
-                {
-                    padding = {left = 6},
-                    normal = {background = Texture2D.whiteTexture},
-                    onNormal = {background = Texture2D.whiteTexture},
-                    richText = true
-                },
-                LineNum = new GUIStyle(EditorStyles.label)
-                {
-                    padding = {left = 6, right = 6}, normal = {background = Texture2D.whiteTexture}
-                }
-            };
+			if (styles == null)
+			{
+				styles = new Styles()
+				{
+					NormalLine = new GUIStyle(EditorStyles.label)
+					{
+						padding = { left = 6 },
+						normal = { background = Texture2D.whiteTexture },
+						onNormal = { background = Texture2D.whiteTexture },
+						richText = true
+					},
+					LineNum = new GUIStyle(EditorStyles.label)
+					{
+						padding = { left = 6, right = 6 },
+						normal = { background = Texture2D.whiteTexture }
+					}
+				};
+			}
         }
 
         protected override void OnGitUpdate(GitRepoStatus status, string[] paths)
@@ -527,8 +531,10 @@ namespace UniGit
 				return;
 			}
 
-			animationTween ??= gitAnimation.StartManualAnimation(AnimationDuration, this, out animationTime,GitSettingsJson.AnimationTypeEnum.DiffInspector);
-
+			if (animationTween == null)
+			{
+				animationTween = gitAnimation.StartManualAnimation(AnimationDuration, this, out animationTime, GitSettingsJson.AnimationTypeEnum.DiffInspector);
+			}
             var resizeRect = new Rect(position.width * otherFileWindowWidth - 3, 0,6, position.height);
 			var indexFileRect = new Rect(position.width * otherFileWindowWidth + (resizeRect.width/2), 0, position.width * (1 - otherFileWindowWidth) - (resizeRect.width / 2), position.height);
 			var otherFileScrollRect = new Rect(0, 0, position.width * otherFileWindowWidth - (resizeRect.width / 2), position.height);
@@ -550,12 +556,22 @@ namespace UniGit
 
 			GUI.Box(resizeRect,GUIContent.none);
 
-            isResizingFileWindow = Event.current.type switch
-            {
-                EventType.MouseUp => false,
-                EventType.MouseDown when resizeRect.Contains(Event.current.mousePosition) => true,
-                _ => isResizingFileWindow
-            };
+			switch (Event.current.type)
+			{
+				case EventType.MouseUp:
+					isResizingFileWindow = false;
+					break;
+				case EventType.MouseDown when resizeRect.Contains(Event.current.mousePosition):
+					isResizingFileWindow = true;
+					break;
+
+			}
+            //isResizingFileWindow = Event.current.type switch
+            //{
+            //    EventType.MouseUp => false,
+            //    EventType.MouseDown when resizeRect.Contains(Event.current.mousePosition) => true,
+            //    _ => isResizingFileWindow
+            //};
 
             if (isResizingFileWindow)
 			{

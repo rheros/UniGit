@@ -57,8 +57,10 @@ namespace UniGit
 
 			if (File.Exists(UniGitPathHelper.Combine(gitManager.GetCurrentRepoPath(), ".gitattributes")))
             {
-                using TextReader file = File.OpenText(UniGitPathHelper.Combine(gitManager.GetCurrentRepoPath(), ".gitattributes"));
-                TrackedInfo = file.ReadToEnd().Split(UniGitPathHelper.NewLineChar).Select(GitLfsTrackedInfo.Parse).Where(l => l != null).ToArray();
+				using (TextReader file = File.OpenText(UniGitPathHelper.Combine(gitManager.GetCurrentRepoPath(), ".gitattributes")))
+				{
+					TrackedInfo = file.ReadToEnd().Split(UniGitPathHelper.NewLineChar).Select(GitLfsTrackedInfo.Parse).Where(l => l != null).ToArray();
+				}
             }
 
 			UpdateInitilized();

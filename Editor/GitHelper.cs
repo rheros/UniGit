@@ -6,7 +6,7 @@ namespace UniGit
 	{
 		public static string RunExeOutput(string repoPath,string exe, string arguments, string input, bool hideWindow = true)
         {
-            using var process = new Process
+            using (var process = new Process
             {
                 StartInfo =
                 {
@@ -18,17 +18,19 @@ namespace UniGit
                     UseShellExecute = false,
                     CreateNoWindow = hideWindow
                 }
-            };
-            process.Start();
-            if (input != null)
+            })
             {
-                process.StandardInput.WriteLine(input);
-                process.StandardInput.Flush();
-                process.StandardInput.Close();
-            }
-            process.WaitForExit();
+                process.Start();
+                if (input != null)
+                {
+                    process.StandardInput.WriteLine(input);
+                    process.StandardInput.Flush();
+                    process.StandardInput.Close();
+                }
+                process.WaitForExit();
 
-            return process.StandardOutput.ReadToEnd();
+                return process.StandardOutput.ReadToEnd();
+            }
         }
 	}
 }

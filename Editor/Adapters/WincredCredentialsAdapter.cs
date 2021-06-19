@@ -38,10 +38,12 @@ namespace UniGit.Adapters
 
 		public bool SaveUsername(string url, string username)
 		{
-            using var credential = new Credential(null, null, url) {PersistanceType = persistanceType};
-            if (!credential.Load()) return false;
-            credential.Username = username;
-            return credential.Save();
+			using (var credential = new Credential(null, null, url) { PersistanceType = persistanceType })
+			{
+				if (!credential.Load()) return false;
+				credential.Username = username;
+				return credential.Save();
+			}
             //Debug.LogErrorFormat("Could not load credential with url: {0} from Windows Creadentials.", url);
         }
 
@@ -89,25 +91,32 @@ namespace UniGit.Adapters
 
 		public bool SavePassword(string url, string username, SecureString password, bool createMissing)
 		{
-            using var credential = new Credential(username, null, url,credentialType) {PersistanceType = persistanceType};
-            if (!credential.Load() && !createMissing) return false;
-            credential.SecurePassword = password;
-            return credential.Save();
+			using (var credential = new Credential(username, null, url, credentialType) { PersistanceType = persistanceType })
+			{
+
+				if (!credential.Load() && !createMissing) return false;
+				credential.SecurePassword = password;
+				return credential.Save();
+			}
 
         }
 
 		public bool Exists(string url)
 		{
 			if (string.IsNullOrEmpty(url)) return false;
-            using var credentialSet = new Credential(null,null,url);
-            credentialSet.Load();
-            return credentialSet.Exists();
+			using (var credentialSet = new Credential(null, null, url))
+			{
+				credentialSet.Load();
+				return credentialSet.Exists();
+			}
         }
 
 		public bool Exists(string url,string username)
         {
-            using var credentialSet = new Credential(username,null,url);
-            return credentialSet.Load();
+			using (var credentialSet = new Credential(username, null, url))
+			{
+				return credentialSet.Load();
+			}
         }
 	}
 #endif

@@ -215,15 +215,30 @@ namespace UniGit
 
 		private string GetUpdateStatusMessage(GitManager.UpdateStatusEnum status)
         {
-            return status switch
-            {
-                GitManager.UpdateStatusEnum.InvalidRepo => "Invalid Repository",
-                GitManager.UpdateStatusEnum.SwitchingToPlayMode => "Switching to play mode",
-                GitManager.UpdateStatusEnum.Compiling => "Compiling",
-                GitManager.UpdateStatusEnum.UpdatingAssetDatabase => "Updating Asset Database",
-                GitManager.UpdateStatusEnum.Updating => "Updating in progress",
-                _ => "Waiting to update"
-            };
+			switch(status)
+			{
+				case GitManager.UpdateStatusEnum.InvalidRepo			   :
+					return "Invalid Repository";
+				case GitManager.UpdateStatusEnum.SwitchingToPlayMode	   :
+					return "Switching to play mode";
+				case GitManager.UpdateStatusEnum.Compiling				   :
+					return "Compiling";
+				case GitManager.UpdateStatusEnum.UpdatingAssetDatabase	   :
+					return "Updating Asset Database";
+				case GitManager.UpdateStatusEnum.Updating:
+					return "Updating in progress";
+				default:
+					return "Waiting to update";
+			}
+            //return status switch
+            //{
+            //    GitManager.UpdateStatusEnum.InvalidRepo				=> "Invalid Repository",
+            //    GitManager.UpdateStatusEnum.SwitchingToPlayMode		=> "Switching to play mode",
+            //    GitManager.UpdateStatusEnum.Compiling				=> "Compiling",
+            //    GitManager.UpdateStatusEnum.UpdatingAssetDatabase	=> "Updating Asset Database",
+            //    GitManager.UpdateStatusEnum.Updating				=> "Updating in progress",
+            //    _ => "Waiting to update"
+            //};
         }
 	}
 }

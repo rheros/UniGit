@@ -58,7 +58,7 @@ namespace UniGit.Adapters
                 {
                     // Start the process with the info we specified.
 					// Call WaitForExit and then the using statement will close.
-                    using var exeProcess = Process.Start(startInfo);
+                    var exeProcess = Process.Start(startInfo);
                     if (exeProcess == null) return false;
                     exeProcess.WaitForExit();
                     return true;

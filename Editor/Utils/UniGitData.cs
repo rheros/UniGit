@@ -25,9 +25,18 @@ namespace UniGit.Utils
 
 		private void OnEnable()
 		{
-			repositoryStatus ??= new GitRepoStatus();
-			dirtyFilesQueue ??= new List<string>();
-			logEntries ??= new List<GitLog.LogEntry>();
+			if (repositoryStatus == null)
+			{
+				repositoryStatus = new GitRepoStatus();
+			}
+			if (dirtyFilesQueue == null)
+			{
+				dirtyFilesQueue = new List<string>();
+			}
+			if (logEntries == null)
+			{
+				logEntries = new List<GitLog.LogEntry>();
+			}
 		}
 
 		[UsedImplicitly]

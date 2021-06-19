@@ -76,19 +76,19 @@ namespace UniGit
 				{
 					try
                     {
-                        using var fileStream = new FileStream(credentialsFilePath,FileMode.Open,FileAccess.Read);
-                        using var p = new DESCryptoServiceProvider();
-                        using var dec = p.CreateDecryptor(Encoding.ASCII.GetBytes(KeyOne),Encoding.ASCII.GetBytes(KeyTwo));
-                        using var cryptoStream = new CryptoStream(fileStream,dec,CryptoStreamMode.Read);
-                        using var streamReader = new StreamReader(cryptoStream);
+                        var fileStream = new FileStream(credentialsFilePath,FileMode.Open,FileAccess.Read);
+                        var p = new DESCryptoServiceProvider();
+                        var dec = p.CreateDecryptor(Encoding.ASCII.GetBytes(KeyOne),Encoding.ASCII.GetBytes(KeyTwo));
+                        var cryptoStream = new CryptoStream(fileStream,dec,CryptoStreamMode.Read);
+                        var streamReader = new StreamReader(cryptoStream);
 
                         var text = streamReader.ReadToEnd();
                         credentialsJson = JsonUtility.FromJson<GitCredentialsJson>(text);
                     }
 					catch
                     {
-                        using var fileStream = new FileStream(credentialsFilePath,FileMode.Open,FileAccess.Read);
-                        using var streamReader = new StreamReader(fileStream);
+                        var fileStream = new FileStream(credentialsFilePath,FileMode.Open,FileAccess.Read);
+                        var streamReader = new StreamReader(fileStream);
                         credentialsJson = JsonUtility.FromJson<GitCredentialsJson>(streamReader.ReadToEnd());
                     }
 				}
@@ -140,11 +140,11 @@ namespace UniGit
 	            {
 		            var json = JsonUtility.ToJson(credentials);
 
-                    using var fileStream = new FileStream(credentialsFilePath, FileMode.OpenOrCreate, FileAccess.Write);
-                    using var p = new DESCryptoServiceProvider();
-                    using var dec = p.CreateEncryptor(Encoding.ASCII.GetBytes(KeyOne), Encoding.ASCII.GetBytes(KeyTwo));
-                    using var cryptoStream = new CryptoStream(fileStream, dec, CryptoStreamMode.Write);
-                    using var streamWriter = new StreamWriter(cryptoStream);
+                    var fileStream = new FileStream(credentialsFilePath, FileMode.OpenOrCreate, FileAccess.Write);
+                    var p = new DESCryptoServiceProvider();
+                    var dec = p.CreateEncryptor(Encoding.ASCII.GetBytes(KeyOne), Encoding.ASCII.GetBytes(KeyTwo));
+                    var cryptoStream = new CryptoStream(fileStream, dec, CryptoStreamMode.Write);
+                    var streamWriter = new StreamWriter(cryptoStream);
                     streamWriter.Write(json);
                 }
 	            catch (Exception e)

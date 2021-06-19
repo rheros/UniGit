@@ -157,7 +157,10 @@ namespace UniGit.Utils
 
 		private void CheckCrossDependency(Resolve resolve, Type injectedType,ParameterInfo parameterInfo)
         {
-            resolve.injectedParamsCached ??= BuildInjectionParams(GetInjectConstructor(resolve.InstanceType));
+			if (resolve.injectedParamsCached == null)
+			{
+				resolve.injectedParamsCached = BuildInjectionParams(GetInjectConstructor(resolve.InstanceType));
+			}
             if (CrossDependency(resolve.injectedParamsCached, injectedType))
 				throw new Exception($"Cross References detected when injecting parameter {parameterInfo.Name} of '{injectedType.Name}' with '{resolve.InstanceType.Name}'");
         }
@@ -525,8 +528,11 @@ namespace UniGit.Utils
 
 			internal void EnsureInstance(InjectionHelper injectionHelper)
             {
-                instance ??= CreateInstance(injectionHelper);
-            }
+				if (instance == null)
+				{ 
+					instance = CreateInstance(injectionHelper);
+				}
+			}
 
 			public void Dispose()
 			{

@@ -253,9 +253,20 @@ namespace UniGit
 
 		protected override void OnEditorUpdate()
 		{
-			loadingProfilePictures ??= new Dictionary<string, UnityWebRequest>();
-			cachedProfilePicturesDictionary ??= new Dictionary<string, Texture2D>();
-			loadingProfilePicturesToRemove ??= new List<string>();
+			if (loadingProfilePictures == null)
+			{
+				loadingProfilePictures = new Dictionary<string, UnityWebRequest>();
+			}
+			if (cachedProfilePicturesDictionary == null)
+			{
+				cachedProfilePicturesDictionary = new Dictionary<string, Texture2D>();
+			}
+			if (loadingProfilePicturesToRemove == null)
+			{
+				loadingProfilePicturesToRemove = new List<string>();
+			}
+		
+		
 
 			if (loadingProfilePictures.Count > 0)
 			{
@@ -263,7 +274,7 @@ namespace UniGit
                 {
                     Texture2D avatarTexture;
 
-                    if (profilePicture.Value.result != UnityWebRequest.Result.Success && profilePicture.Value.result != UnityWebRequest.Result.InProgress)
+                    if (profilePicture.Value.isNetworkError)
                     {
                         logger.LogError("error", profilePicture.Value.error,this);
                         avatarTexture = new Texture2D(1, 1);
